@@ -17,11 +17,12 @@ MANGALIB = Site(1, 'mangalib.me')
 SLASHLIB = Site(2, 'v2.slashlib.me')
 RANOBELIB = Site(3, 'ranobelib.me')
 HENTAILIB = Site(4, 'hentailib.me')
+ANIMELIB = Site(5, 'anilib.me')
 
 
-SITES_LIST = [MANGALIB, SLASHLIB, RANOBELIB, HENTAILIB]
-IDS = [1,2,3,4]
+SITES_LIST = [MANGALIB, SLASHLIB, RANOBELIB, HENTAILIB, ANIMELIB]
+IDS = [1,2,3,4, 5]
 
-def get_site_by_id(id:int):
+def get_site_by_id(id:int) -> Site:
     index = IDS.index(id)
     return SITES_LIST[index]
