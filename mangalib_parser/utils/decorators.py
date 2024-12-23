@@ -13,7 +13,9 @@ def retry(parsing_func):
                 return parsing_func(*args, **kwargs)
             except:
                 if try_ != settings.MAX_OF_ATTEMPTS:
-                    time.sleep(5)
+                    time.sleep(settings.TIMEOUT_BETWEEN_REPETITIONS)
+                else:
+                    {'data': []}
     return wrapped
 
 

@@ -8,6 +8,10 @@ def add_protocol_and_domen(func):
 
 
 @add_protocol_and_domen
+def generate_user_bookmarks_parsing_url() -> str:
+    return f'/api/bookmarks'
+
+@add_protocol_and_domen
 def generate_user_comments_parsing_url(user_id: int) -> str:
     return f'/api/user/{user_id}/comments'
 
