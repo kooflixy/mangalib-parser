@@ -6,8 +6,8 @@ class MainObject:
 
     site = sites.MANGALIB
 
-    def parse(self, url: str, count, site:Site=sites.MANGALIB, **params) -> dict:
+    def parse(self, url: str, count=None, site:Site=sites.MANGALIB, **params) -> dict:
         return get_pages(url=url, headers=site.headers, params=params, max_count=count)
     
     def get_url(self) -> str:
-        return 'https://' + self.site.domain + '/' + self.model + '/' + (self.id if self.model=='user' else self.slug_url)
+        return 'https://' + self.site.domain + '/' + self.model.model + '/' + (self.id if self.model=='user' else self.slug_url)

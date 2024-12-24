@@ -12,8 +12,95 @@
 
 <h2 id='rus-classes-title'>Классы</h1>
 <ul>
+    <li><a href='#rus-user-class'>User</a></li>
     <li><a href='#rus-bookmark-class'>Bookmark</a></li>
 </ul>
+
+<section id='rus-user-class'>
+    <h3><b>User</b> class</h3>
+    <section>
+        <dl>
+            <dt>class <b>User</b>(id: int, autoparse: bool=True)</dt>
+            <dd>Класс, собирающий информацию о пользователе и представляющий его.</dd>
+        </dl>
+        <section>
+            <dl id='rus-user-id'>
+                <dt>User.id</dt>
+                <dd>
+                    Уникальный айди пользователя.
+                </dd>
+            </dl>
+            <dl id='rus-user-id'>
+                <dt>User.autoparse</dt>
+                <dd>
+                    Параметр, от которого зависит, будет ли парситься больше информации о пользователя при инициализации нового объекта класса. По умолчанию True.
+                </dd>
+            </dl>
+            <dl id='rus-user-url'>
+                <dt>User.url</dt>
+                <dd>
+                    Ссылка на профиль пользователя.
+                </dd>
+            </dl>
+            <dl id='rus-user-username'>
+                <dt>User.username</dt>
+                <dd>
+                    Имя в профиле пользователя.
+                </dd>
+            </dl>
+            <dl id='rus-user-about'>
+                <dt>User.about</dt>
+                <dd>
+                    Описание в профиле пользователя.
+                </dd>
+            </dl>
+            <dl id='rus-user-last-online-at'>
+                <dt>User.last_online_at</dt>
+                <dd>
+                    Дата и время, когда пользователь был в сети в последний раз.
+                </dd>
+            </dl>
+            <dl id='rus-user-created-at'>
+                <dt>User.created_at</dt>
+                <dd>
+                    Дата и время создания профиля пользователя.
+                </dd>
+            </dl>
+            <dl id='rus-user-level'>
+                <dt>User.level</dt>
+                <dd>
+                    Информация об уровне пользователя.
+                </dd>
+            </dl>
+            <dl id='rus-user-teams'>
+                <dt>User.teams</dt>
+                <dd>
+                    Список с командами переводчиков, в которых состоит пользователь.
+                </dd>
+            </dl>
+        </section>
+    </section>
+    <section id='rus-user-methods'>
+        <h4><b>Методы</b></h4>
+        <section id='rus-user-get-bookmarks'>
+            <dl>
+                <dt>User.get_bookmarks(sort_by: str='name', sort_type: str='desc', status: Status=statuses.ALL, site: Site=sites.MANGALIB, as_json: bool=False, count: int=None) -> list[Bookmark]|dict </dt>
+                <dd>
+                    pass
+                </dd>
+            </dl>
+        </section>
+        <section id='rus-user-get-comments'>
+            <dl>v
+                <dt>User.get_comments(sort_by: str='id', sort_type: str='desc', as_json: bool=False, count: int=None) -> list[Comment]|dict</dt>
+                <dd>
+                    pass
+                </dd>
+            </dl>
+        </section>
+    </section>
+</section>
+
 <section id='rus-bookmark-class'>
     <h3><b>Bookmark</b> class</h3>
     <section>
@@ -61,7 +148,7 @@
             </dl>
             <dl id='rus-bookmark-model'>
                 <dt>Bookmark.model</dt>
-                <dd>Модель, тип или же класс объекта.</dd>
+                <dd>Модель, тип или же класс объекта. Можно импоритровать с помощью <i><b>from mangalib_parser.data import models</i></b></dd>
             </dl>
         </section>
     </dl>

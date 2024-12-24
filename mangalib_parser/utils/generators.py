@@ -7,9 +7,19 @@ def add_protocol_and_domen(func):
     return wrapped
 
 
+def get_user_profile_url(self):
+    return 'https://' + self.site.domain + '/ru/' + self.model.model + '/' + str(self.id)
+
+
+#for parsing
+
+@add_protocol_and_domen
+def generate_user_profile_parsing_url(user_id: int) -> str:
+    return '/api/user/' + str(user_id)
+
 @add_protocol_and_domen
 def generate_user_bookmarks_parsing_url() -> str:
-    return f'/api/bookmarks'
+    return '/api/bookmarks'
 
 @add_protocol_and_domen
 def generate_user_comments_parsing_url(user_id: int) -> str:
@@ -17,4 +27,4 @@ def generate_user_comments_parsing_url(user_id: int) -> str:
 
 @add_protocol_and_domen
 def generate_user_friends_parsing_url() -> str:
-    return f'/api/friendship'
+    return '/api/friendship'

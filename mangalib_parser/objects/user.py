@@ -1,20 +1,47 @@
-from mangalib_parser.utils import converters, generators
+from mangalib_parser.utils import converters, generators, parser
 from mangalib_parser.utils.decorators import *
 from mangalib_parser.objects.main_object import MainObject
-from mangalib_parser.data import sites, statuses
+from mangalib_parser.objects.team import Team
+from mangalib_parser.data import sites, statuses, models
 from mangalib_parser.data.sites import Site
 from mangalib_parser.data.statuses import Status
+from mangalib_parser.data.level import Level
+
+from datetime import datetime
 
 
 class User(MainObject):
-    def __init__(self, id: int, **kwargs):
+    def __init__(self, id: int, autoparse: bool=True, **kwargs):
         self.__dict__ = kwargs
         self.id = id
-        self.model = 'user'
+        self.model = models.USER
+        self.url = generators.get_user_profile_url(self)
+        if autoparse:
+            self.get_user_profile()
+
+
+
+    def get_user_profile(self):
+        url = generators.generate_user_profile_parsing_url(self.id)
+        profile = parser.get_json_response(url, self.site.headers, {'fields[]':['background', 'roles', 'points', 'ban_info', 'gender', 'created_at', 'about', 'teams',]})
+        profile = profile['data']
+
+        self.username = profile['username']
+        self.about = profile['about']
+        self.last_online_at = datetime.strptime(profile['last_online_at'][:-8], "%Y-%m-%dT%H:%M:%S")
+        self.created_at = datetime.strptime(profile['created_at'][:-8], "%Y-%m-%dT%H:%M:%S")
+        self.level = Level(
+            total_points = profile['points_info']['total_points'],
+            level = profile['points_info']['level'],
+            max_level_points = profile['points_info']['max_level_points'],
+            current_level_points = profile['points_info']['current_level_points'],
+            point_percent_progress = profile['points_info']['point_percent_progress'],
+        )
+        self.teams = [Team(team['id']) for team in profile['teams']]
     
+
     @convert_to_class(converters.to_bookmark)
     def get_bookmarks(self, sort_by='name', sort_type='desc', status: Status=statuses.ALL, site:Site=sites.MANGALIB, as_json:bool=False, count:int=None) -> dict:
-
         r'''Sends user's bookmark from the selected site
         :param sort_by: Sort selection by critetion. // Выбор сортировки по критерию.
                         Can take values like this: // Может принимать такие значения:
