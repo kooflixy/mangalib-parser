@@ -17,7 +17,7 @@
     <li><a href='#rus-comment-class'>Comment</a></li>
     <li><a href='#rus-friend-class'>Friend</a></li>
     <li><a href='#rus-team-class'>Team</a></li>
-    <li><a href='#rus-team-member-class'>Team</a></li>
+    <li><a href='#rus-team-member-class'>TeamMember</a></li>
 </ul>
 
 <section id='rus-user-class'>
