@@ -11,6 +11,8 @@ class Site:
             'referer': 'https://' + self.domain + '/',
             'site-id': str(self.id),
         }
+    def __str__(self):
+        return self.domain
 
 
 MANGALIB = Site(1, 'mangalib.me')
@@ -21,8 +23,7 @@ ANIMELIB = Site(5, 'anilib.me')
 
 
 SITES_LIST = [MANGALIB, SLASHLIB, RANOBELIB, HENTAILIB, ANIMELIB]
-IDS = [1,2,3,4, 5]
-
 def get_site_by_id(id:int) -> Site:
-    index = IDS.index(id)
-    return SITES_LIST[index]
+    for site in SITES_LIST:
+        if site.id == id:
+            return site

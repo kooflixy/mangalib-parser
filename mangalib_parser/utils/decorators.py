@@ -1,6 +1,7 @@
 import time
 
 from mangalib_parser.settings import settings
+import logging
 
 
 def retry(parsing_func):
@@ -11,8 +12,9 @@ def retry(parsing_func):
         for try_ in range(1, settings.MAX_OF_ATTEMPTS+1):
             try:
                 return parsing_func(*args, **kwargs)
-            except:
+            except Exception as ex:
                 if try_ != settings.MAX_OF_ATTEMPTS:
+                    logging.info(f'{try_} attempt to parse: {ex}')
                     time.sleep(settings.TIMEOUT_BETWEEN_REPETITIONS)
                 else:
                     {'data': []}

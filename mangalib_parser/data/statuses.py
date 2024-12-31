@@ -2,6 +2,9 @@ class Status:
     def __init__(self, id: int, name: str):
         self.id = id
         self.name = name
+    
+    def __str__(self):
+        return self.name
 
 # manga
 ALL = Status(0, 'Все')
@@ -25,10 +28,7 @@ STATUSES_LIST = [
     ALL, READING, IN_PLANS, ABADONED, READ, FAVORITES, 
     WATCHING, PLANNED, ANI_ABADONED, VIEWED, ANI_FAVORITES, REWATCHING, POSTPONED,
 ]
-IDS = [
-    0,1,2,3,4,5,
-    21,22,23,24,25,26,27,
-]
 def get_status_by_id(id:int) -> Status:
-    index = IDS.index(id)
-    return STATUSES_LIST[index]
+    for status in STATUSES_LIST:
+        if status.id == id:
+            return status

@@ -1,8 +1,9 @@
+from mangalib_parser.settings.logging import do_log
 from mangalib_parser.utils import converters, generators, parser
 from mangalib_parser.utils.decorators import *
 from mangalib_parser.objects.main_object import MainObject
 from mangalib_parser.objects.team import Team
-from mangalib_parser.data import sites, statuses, models
+from mangalib_parser.data import sites, statuses, models, level
 from mangalib_parser.data.sites import Site
 from mangalib_parser.data.statuses import Status
 from mangalib_parser.data.level import Level
@@ -12,23 +13,35 @@ from datetime import datetime
 
 class User(MainObject):
     def __init__(self, id: int, autoparse: bool=True, **kwargs):
-        self.__dict__ = kwargs
-        self.id = id
-        self.model = models.USER
+        self.id: int = id
+        self.model: models.Model = models.USER
         self.url = generators.get_user_profile_url(self)
+
+        self.username: str = None
+        self.about: str = None
+        self.last_online_at: datetime = None
+        self.created_at: datetime = None
+        self.level: level.Level = None
+        self.teams: list[Team] = None
+        self.__dict__.update(kwargs)
         if autoparse:
-            self.get_user_profile()
+            self.get_user_info()
+
+    def __str__(self):
+        return f'User({self.id})'
 
 
+    @do_log
+    def get_user_info(self):
+        '''Parses and returns more info about user'''
 
-    def get_user_profile(self):
         url = generators.generate_user_profile_parsing_url(self.id)
         profile = parser.get_json_response(url, self.site.headers, {'fields[]':['background', 'roles', 'points', 'ban_info', 'gender', 'created_at', 'about', 'teams',]})
         profile = profile['data']
 
         self.username = profile['username']
         self.about = profile['about']
-        self.last_online_at = datetime.strptime(profile['last_online_at'][:-8], "%Y-%m-%dT%H:%M:%S")
+        self.last_online_at = datetime.strptime(profile['last_online_at'][:-8], "%Y-%m-%dT%H:%M:%S") if 'last_online_at' in profile else None
         self.created_at = datetime.strptime(profile['created_at'][:-8], "%Y-%m-%dT%H:%M:%S")
         self.level = Level(
             total_points = profile['points_info']['total_points'],
@@ -37,10 +50,11 @@ class User(MainObject):
             current_level_points = profile['points_info']['current_level_points'],
             point_percent_progress = profile['points_info']['point_percent_progress'],
         )
-        self.teams = [Team(team['id']) for team in profile['teams']]
+        self.teams = [Team(id=team['id']) for team in profile['teams']]
     
 
     @convert_to_class(converters.to_bookmark)
+    @do_log
     def get_bookmarks(self, sort_by='name', sort_type='desc', status: Status=statuses.ALL, site:Site=sites.MANGALIB, as_json:bool=False, count:int=None) -> dict:
         r'''Sends user's bookmark from the selected site
         :param sort_by: Sort selection by critetion. // Выбор сортировки по критерию.
@@ -68,6 +82,7 @@ class User(MainObject):
 
 
     @convert_to_class(converters.to_comment)
+    @do_log
     def get_comments(self, sort_by='id', sort_type='desc', as_json:bool=False, count:int=None) -> dict:
 
         r'''Sends user's comments
@@ -91,6 +106,7 @@ class User(MainObject):
     
 
     @convert_to_class(converters.to_friend)
+    @do_log
     def get_friends(self, as_json:bool=False, count:int=None) -> dict:
         
         r'''Sends user's friends

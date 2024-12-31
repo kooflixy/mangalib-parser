@@ -1,6 +1,6 @@
 from mangalib_parser.data import sites
 from mangalib_parser.data.sites import Site
-from mangalib_parser.utils import get_pages
+from mangalib_parser.utils.parser import get_pages
 
 class MainObject:
 
