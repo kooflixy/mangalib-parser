@@ -5,10 +5,15 @@
 
 <h1>RUS</h1>
 
+
 <h2>Навигация</h2>
 <ul>
+    <li><a href='#rus-installation'>Установка</a></li>
     <li><a href='#rus-classes-title'>Классы</a></li>
 </ul>
+
+<h2 id='rus-installation'>Установка</h2>
+<code>pip install git+https://github.com/kooflixy/mangalib-parser.git</code>
 
 <h2 id='rus-classes-title'>Классы</h1>
 <ul>
@@ -118,13 +123,13 @@
                             <dl id='rus-user-get-bookmarks-status-values'>
                                 <dt>status :</dt>
                                 <dd>
-                                    <p>То, какого статуса будут закладки, которые будут парситься(Читаю, Смотрю, Прочитано и т.д.). По умолчанию стоит ВСЕ. Импорт с помощью <i><b>from mangalib_parser import statuses</i></b></p>
+                                    <p>То, какого статуса будут закладки, которые будут парситься(Читаю, Смотрю, Прочитано и т.д.). По умолчанию стоит ВСЕ. Импорт с помощью <code>from mangalib_parser import statuses</code></p>
                                 </dd>
                             </dl>
                             <dl id='rus-user-get-bookmarks-site-values'>
                                 <dt>site :</dt>
                                 <dd>
-                                    <p>То, с какого сайта будут закладки, которые будут парситься(Мангалиб, Ранобелиб, Анимелиб и т.д.). По умолчанию стоит Мангалиб. Импорт с помощью <i><b>from mangalib_parser import sites</i></b></p>
+                                    <p>То, с какого сайта будут закладки, которые будут парситься(Мангалиб, Ранобелиб, Анимелиб и т.д.). По умолчанию стоит Мангалиб. Импорт с помощью <code>from mangalib_parser import sites</code></p>
                                 </dd>
                             </dl>
                             <dl id='rus-user-get-bookmarks-as-json-values'>
@@ -232,7 +237,7 @@
             </dl>
             <dl id='rus-bookmark-status'>
                 <dt>Bookmark.status</dt>
-                <dd>Статус чтения тайтла(Читаю, Прочитано и т.д.). Импорт с помощью  <i><b>from mangalib_parser import statuses</i></b></dd>
+                <dd>Статус чтения тайтла(Читаю, Прочитано и т.д.). Импорт с помощью  <code>from mangalib_parser import statuses</code></dd>
             </dl>
             <dl id='rus-bookmark-created-at'>
                 <dt>Bookmark.created_at</dt>
@@ -256,11 +261,11 @@
             </dl>
             <dl id='rus-bookmark-site'>
                 <dt>Bookmark.site</dt>
-                <dd>Сайт, на котором опубликован данный тайтл. Можно импоритровать с помощью <i><b>from mangalib_parser import sites</i></b></dd>
+                <dd>Сайт, на котором опубликован данный тайтл. Можно импоритровать с помощью <code>from mangalib_parser import sites</code></dd>
             </dl>
             <dl id='rus-bookmark-model'>
                 <dt>Bookmark.model</dt>
-                <dd>Модель, тип или же класс объекта. Можно импоритровать с помощью <i><b>from mangalib_parser import models</i></b></dd>
+                <dd>Модель, тип или же класс объекта. Можно импоритровать с помощью <code>from mangalib_parser import models</code></dd>
             </dl>
         </dd>
     </dl>
@@ -296,7 +301,7 @@
                 </dl>
                 <dl id='rus-comment-relation-type'>
                     <dt>Comment.relation_type</dt>
-                    <dd>Модель, тип или же класс объекта, к котороиу был написан комментарий. Можно импоритровать с помощью <i><b>from mangalib_parser import models</i></b></dd>
+                    <dd>Модель, тип или же класс объекта, к котороиу был написан комментарий. Можно импоритровать с помощью <code>from mangalib_parser import models</code></dd>
                 </dl>
                 <dl id='rus-comment-slug-url'>
                     <dt>Comment.slug_url</dt>
@@ -304,7 +309,7 @@
                 </dl>
                 <dl id='rus-comment-site'>
                     <dt>Comment.site</dt>
-                    <dd>Сайт, на котором опубликован данный тайтл. Можно импоритровать с помощью <i><b>from mangalib_parser import sites</i></b></dd>
+                    <dd>Сайт, на котором опубликован данный тайтл. Можно импоритровать с помощью <code>from mangalib_parser import sites</code></dd>
                 </dl>
                 <dl id='rus-comment-url'>
                     <dt>Comment.url</dt>
