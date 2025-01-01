@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 def readme():
-    with open('README.md', 'r') as f:
+    with open('README.md', 'r', encoding='utf-8') as f:
         return f.read()
 
 
@@ -19,7 +19,7 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3.13',
         'License :: OSI Approved :: Unlicense',
-    ],
+],
     keywords='parser api mangalib library',
     project_urls={
         'GitHub': 'https://github.com/kooflixy'
